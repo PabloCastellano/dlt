@@ -28,7 +28,7 @@ Above we use built in **filesystem** destination by providing a class type `file
 
 Above we import destination class for **filesystem** and pass it to the pipeline.
 
-All examples above will create the same destination class with default parameters and pull required config and secret values from [configuration](credentials/configuration.md) - they are equivalent.
+All examples above will create the same destination class with default parameters and pull required config and secret values from [configuration](credentials/index.md) - they are equivalent.
 
 
 ### Pass explicit parameters and a name to a destination
@@ -40,9 +40,9 @@ Above we import and instantiate the `filesystem` destination class. We pass expl
 If destination is not named, its shorthand type (the Python class name) serves as a destination name. Name your destination explicitly if you need several separate configurations of destinations of the same type (i.e. you wish to maintain credentials for development, staging and production storage buckets in the same config file). Destination name is also stored in the [load info](../running-in-production/running.md#inspect-and-save-the-load-info-and-trace) and pipeline traces so use them also when you need more descriptive names (other than, for example, `filesystem`).
 
 ## Configure a destination
-We recommend to pass the credentials and other required parameters to configuration via TOML files, environment variables or other [config providers](credentials/config_providers.md). This allows you, for example, to  easily switch to production destinations after deployment.
+We recommend to pass the credentials and other required parameters to configuration via TOML files, environment variables or other [config providers](credentials/how_to_set_up_credentials). This allows you, for example, to  easily switch to production destinations after deployment.
 
-We recommend to use the [default config section layout](credentials/configuration.md#default-layout-and-default-key-lookup-during-injection) as below:
+We recommend to use the [default config section layout](credentials/how_to_set_up_credentials#structure-of-secrets.toml-and-config.toml) as below:
 <!--@@@DLT_SNIPPET ./snippets/destination-toml.toml::default_layout-->
 
 or via environment variables:
@@ -64,14 +64,14 @@ You can pass credentials explicitly when creating destination class instance. Th
 
 
 :::tip
-You can create and pass partial credentials and `dlt` will fill the missing data. Below we pass postgres connection string but without password and expect that it will be present in environment variables (or any other [config provider](credentials/config_providers.md))
+You can create and pass partial credentials and `dlt` will fill the missing data. Below we pass postgres connection string but without password and expect that it will be present in environment variables (or any other [config provider](credentials/how_to_set_up_credentials))
 <!--@@@DLT_SNIPPET ./snippets/destination-snippets.py::config_partial-->
 
 
 <!--@@@DLT_SNIPPET ./snippets/destination-snippets.py::config_partial_spec-->
 
 
-Please read how to use [various built in credentials types](credentials/config_specs.md).
+Please read how to use [various built in credentials types](credentials/prebuilt_dlt_credential_types).
 :::
 
 ### Configure multiple destinations in a pipeline
@@ -86,7 +86,7 @@ private_key = "please set me up!"
 client_email = "please set me up!"
 ```
 
-You can then use this destination in your pipeline as follows: 
+You can then use this destination in your pipeline as follows:
 ```py
 import dlt
 from dlt.common.destination import Destination
